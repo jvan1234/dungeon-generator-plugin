@@ -6,4 +6,3 @@ function Generate_Dungeon (length: number, width: number) {
         }
     }
 }
-
