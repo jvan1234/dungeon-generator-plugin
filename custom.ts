@@ -4,28 +4,18 @@
 * Read more at https://arcade.makecode.com/blocks/custom
 */
 
-enum MyEnum {
+//enum MyEnum {
     //% block="one"
-    One,
+    //One,
     //% block="two"
-    Two
-}
+    //Two
+//}
 
 /**
  * Custom blocks
  */
 //% weight=100 color=#0fbc11 icon=""
 namespace custom {
-    /**
-     * TODO: describe your function here
-     * @param n describe parameter here, eg: 5
-     * @param s describe parameter here, eg: "Hello"
-     * @param e describe parameter here
-     */
-    //% block
-    export function foo(n: number, s: string, e: MyEnum): void {
-        // Add code here
-    }
     /**
      * TODO: This code generates a rectangle given parameters
      * @param length how wide the dungeon will be, in tiles
