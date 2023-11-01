@@ -10,7 +10,7 @@
  * Custom blocks
  */
 //% weight=100 color=#0fbc11 icon=""
-namespace custom {
+namespace dungeons {
     /**
      * TODO: This code generates a rectangle given parameters
      * @param length how wide the dungeon will be, in tiles
