@@ -4,12 +4,7 @@
 * Read more at https://arcade.makecode.com/blocks/custom
 */
 
-//enum MyEnum {
-    //% block="one"
-    //One,
-    //% block="two"
-    //Two
-//}
+
 
 /**
  * Custom blocks
