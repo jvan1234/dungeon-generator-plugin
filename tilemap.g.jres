@@ -4,12 +4,6 @@
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true
     },
-    "tile1": {
-        "data": "hwQQABAAAAAzMzMzMzMzMzMzMzMzMzMzMyIiIiIiIjMzIiIiIiIiMzMiIiIiIiIzMyIiIiIiIjMzIiIiIiIiMzMiIiIiIiIzMyIiIiIiIjMzIiIiIiIiMzMiIiIiIiIzMyIiIiIiIjMzIiIiIiIiMzMiIiIiIiIzMzMzMzMzMzMzMzMzMzMzMw==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true,
-        "displayName": "myTile"
-    },
     "level2": {
         "id": "level2",
         "mimeType": "application/mkcd-tilemap",
