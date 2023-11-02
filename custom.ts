@@ -26,16 +26,10 @@ namespace dungeons {
                     tiles.setTileAt(tiles.getTileLocation(xIndex, yIndex), sprites.dungeon.floorLight0)
                     tiles.setWallAt(tiles.getTileLocation(xIndex, yIndex), true)
                 }
+                if (xIndex == 1 && yIndex == 1) {
+                    tiles.setTileAt(tiles.getTileLocation(xIndex, yIndex), sprites.dungeon.stairLarge)
+                }
             }
         }
-    }
-
-    /**
-     * TODO: describe your function here
-     * @param value describe value here, eg: 5
-     */
-    //% block
-    export function fib(value: number): number {
-        return value <= 1 ? value : fib(value -1) + fib(value - 2);
     }
 }
