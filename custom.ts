@@ -13,8 +13,8 @@
 namespace dungeons {
     /**
      * TODO: This code generates a rectangle given parameters
-     * @param length how wide the dungeon will be, in tiles
-     * @param width how long the dungeon will be, in tiles
+     * @param length how wide the dungeon will be, in tiles, eg: 10
+     * @param width how long the dungeon will be, in tiles, eg: 10
      */
     //% block
     export function Generate_Dungeon(length: number, width: number) {
