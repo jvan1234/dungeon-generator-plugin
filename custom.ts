@@ -17,11 +17,12 @@ namespace dungeons {
      * @param width how long the dungeon will be, in tiles
      */
     //% block
-    export function GenerateDungeon(length: number, width: number) {
+    export function Generate_Dungeon(length: number, width: number) {
         tiles.setCurrentTilemap(tilemap`level1`)
-        for (let xIndex = 0; xIndex <= length; xIndex++) {
-            for (let yIndex = 0; yIndex <= width; yIndex++) {
-                if (xIndex == 0 || xIndex == length || (yIndex == 0 || yIndex == width)) {
+        for (let xIndex = 0; xIndex <= length - 1; xIndex++) {
+            for (let yIndex = 0; yIndex <= width - 1; yIndex++) {
+                tiles.setTileAt(tiles.getTileLocation(xIndex, yIndex), sprites.dungeon.darkGroundCenter)
+                if (xIndex == 0 || xIndex == length - 1 || (yIndex == 0 || yIndex == width - 1)) {
                     tiles.setTileAt(tiles.getTileLocation(xIndex, yIndex), sprites.dungeon.floorLight0)
                     tiles.setWallAt(tiles.getTileLocation(xIndex, yIndex), true)
                 }
