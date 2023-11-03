@@ -17,6 +17,8 @@ namespace dungeons {
      * @param width how long the dungeon will be, in tiles, eg: 10
      */
     //% block
+    let Digger: Sprite = null
+    let currentPosition: tiles.Location = null
     export function Generate_Dungeon(length: number, width: number, wall_chance: number) {
         tiles.setCurrentTilemap(tilemap`level1`)
         for (let xIndex = 0; xIndex <= length - 1; xIndex++) {
@@ -28,8 +30,28 @@ namespace dungeons {
                 }
                 if (xIndex == 1 && yIndex == 1) {
                     tiles.setTileAt(tiles.getTileLocation(xIndex, yIndex), sprites.dungeon.stairLarge)
+                    tiles.setWallAt(tiles.getTileLocation(xIndex, yIndex), false)
+                } else if (xIndex == length - 2 && yIndex == width - 2) {
+                    tiles.setTileAt(tiles.getTileLocation(xIndex, yIndex), sprites.dungeon.collectibleInsignia)
+                    tiles.setWallAt(tiles.getTileLocation(xIndex, yIndex), false)
                 }
             }
         }
+        Digger = sprites.create(assets.image`shovel`, SpriteKind.Player)
+        tiles.placeOnTile(Digger, tiles.getTileLocation(1, 1))
+        while (!(Digger.tileKindAt(TileDirection.Center, sprites.dungeon.collectibleInsignia))) {
+            currentPosition = Digger.tilemapLocation()
+            console.log("" + currentPosition.column + ", " + currentPosition.row)
+            if (Math.percentChance(50) && currentPosition.column < length - 2) {
+                tiles.placeOnTile(Digger, tiles.getTileLocation(currentPosition.column + 1, currentPosition.row))
+            } else if (Math.percentChance(100) && currentPosition.row < width - 2) {
+                tiles.placeOnTile(Digger, tiles.getTileLocation(currentPosition.column, currentPosition.row + 1))
+            }
+            if (!(Digger.tileKindAt(TileDirection.Center, sprites.dungeon.stairLarge) || Digger.tileKindAt(TileDirection.Center, sprites.dungeon.collectibleInsignia))) {
+                tiles.setTileAt(Digger.tilemapLocation(), sprites.dungeon.darkGroundCenter)
+                tiles.setWallAt(Digger.tilemapLocation(), false)
+            }
+        }
+        sprites.destroy(Digger)
     }
 }
