@@ -9,7 +9,7 @@
 /**
  * Custom blocks
  */
-//% weight=100 color=#0fbc11 icon="╬"
+//% weight=100 color=#8B8B8B icon="╬"
 namespace dungeons {
     /**
      * TODO: This code generates a rectangle given parameters
