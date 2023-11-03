@@ -17,9 +17,10 @@ namespace dungeons {
      * @param width how long the dungeon will be, in tiles, eg: 10
      */
     //% block
-    let Digger: Sprite = null
-    let currentPosition: tiles.Location = null
+    
     export function Generate_Dungeon(length: number, width: number, wall_chance: number) {
+        let Digger: Sprite = null
+        let currentPosition: tiles.Location = null
         tiles.setCurrentTilemap(tilemap`level1`)
         for (let xIndex = 0; xIndex <= length - 1; xIndex++) {
             for (let yIndex = 0; yIndex <= width - 1; yIndex++) {
