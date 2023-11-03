@@ -3,7 +3,8 @@ namespace SpriteKind {
 }
 let Digger: Sprite = null
 let currentPosition: tiles.Location = null
-let mySprite: Sprite = null
+let ChomperSprite: Sprite = null
+let chomperPos: tiles.Location = null
 function Generate_Dungeon (length: number, width: number, wall_chance: number) {
     tiles.setCurrentTilemap(tilemap`level1`)
     for (let xIndex = 0; xIndex <= length - 1; xIndex++) {
@@ -32,7 +33,7 @@ function Generate_Dungeon (length: number, width: number, wall_chance: number) {
         } else if (Math.percentChance(75) && currentPosition.row < width - 2) {
             tiles.placeOnTile(Digger, tiles.getTileLocation(currentPosition.column, currentPosition.row + 1))
         } else {
-            Create_Chomper(sprites.create(assets.image`Chomper`, SpriteKind.Chomper), 4, "south")
+            Create_Chomper(sprites.create(assets.image`Chomper`, SpriteKind.Chomper), 4, 3, "south")
         }
         if (!(Digger.tileKindAt(TileDirection.Center, sprites.dungeon.stairLarge) || Digger.tileKindAt(TileDirection.Center, sprites.dungeon.collectibleInsignia))) {
             tiles.setTileAt(Digger.tilemapLocation(), sprites.dungeon.darkGroundCenter)
@@ -41,6 +42,19 @@ function Generate_Dungeon (length: number, width: number, wall_chance: number) {
     }
     sprites.destroy(Digger)
 }
-function Create_Chomper (Chomper: Sprite, length: number, direction: string) {
-    mySprite = Chomper
+function Create_Chomper (Chomper: Sprite, length: number, sizeCap: number, direction: string) {
+    ChomperSprite = Chomper
+    tiles.placeOnTile(ChomperSprite, Digger.tilemapLocation())
+    for (let index = 0; index < length; index++) {
+        chomperPos = ChomperSprite.tilemapLocation()
+        if (direction == "south") {
+            tiles.placeOnTile(ChomperSprite, tiles.getTileLocation(chomperPos.column, chomperPos.row + 1))
+        } else if (direction == "north") {
+            tiles.placeOnTile(ChomperSprite, tiles.getTileLocation(chomperPos.column, chomperPos.row - 1))
+        }
+        if (!(ChomperSprite.tileKindAt(TileDirection.Center, sprites.dungeon.stairLarge) || ChomperSprite.tileKindAt(TileDirection.Center, sprites.dungeon.collectibleInsignia))) {
+            tiles.setTileAt(ChomperSprite.tilemapLocation(), sprites.dungeon.darkGroundCenter)
+            tiles.setWallAt(ChomperSprite.tilemapLocation(), false)
+        }
+    }
 }
