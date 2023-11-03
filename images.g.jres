@@ -9,6 +9,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "shovel"
     },
+    "image3": {
+        "data": "hwQQABAAAAAAAFVVVVUAAABVVVVVVVUAUFVVVVVVVQVQVVVVVVVVBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUVfVVVVVVVVVfRVVVVVVVVFX1VVVVVVVVX0VVVVVVVVRV9VVVVQ9f9V9FVVBVD1/0VfVVUFAFVVVfRVVQAAAFVFX1UAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "Chomper"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",
