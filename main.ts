@@ -1,15 +1,9 @@
-namespace SpriteKind {
-    export const Chomper = SpriteKind.create()
-}
-function Generate_Dungeon (length: number, width: number, wall_chance: number) {
+function Generate_Dungeon (length: number, width: number, chomper_chance: number) {
     tiles.setCurrentTilemap(tilemap`level1`)
     for (let xIndex = 0; xIndex <= length - 1; xIndex++) {
         for (let yIndex = 0; yIndex <= width - 1; yIndex++) {
-            tiles.setTileAt(tiles.getTileLocation(xIndex, yIndex), sprites.dungeon.darkGroundCenter)
-            if (Math.percentChance(wall_chance) || (xIndex == 0 || xIndex == length - 1 || (yIndex == 0 || yIndex == width - 1))) {
-                tiles.setTileAt(tiles.getTileLocation(xIndex, yIndex), sprites.dungeon.floorLight0)
-                tiles.setWallAt(tiles.getTileLocation(xIndex, yIndex), true)
-            }
+            tiles.setTileAt(tiles.getTileLocation(xIndex, yIndex), sprites.dungeon.floorLight0)
+            tiles.setWallAt(tiles.getTileLocation(xIndex, yIndex), true)
             if (xIndex == 1 && yIndex == 1) {
                 tiles.setTileAt(tiles.getTileLocation(xIndex, yIndex), sprites.dungeon.stairLarge)
                 tiles.setWallAt(tiles.getTileLocation(xIndex, yIndex), false)
@@ -21,21 +15,28 @@ function Generate_Dungeon (length: number, width: number, wall_chance: number) {
     }
     Digger = sprites.create(assets.image`shovel`, SpriteKind.Player)
     tiles.placeOnTile(Digger, tiles.getTileLocation(1, 1))
-    list = [
+    directions = [
     "north",
     "south",
     "east",
     "west"
     ]
     while (!(Digger.tileKindAt(TileDirection.Center, sprites.dungeon.collectibleInsignia))) {
+        go = randint(0, 3)
         currentPosition = Digger.tilemapLocation()
         console.log("" + currentPosition.column + ", " + currentPosition.row)
-        if (Math.percentChance(75) && currentPosition.column < length - 2) {
+        if (go == 0 && currentPosition.column < length - 2) {
             tiles.placeOnTile(Digger, tiles.getTileLocation(currentPosition.column + 1, currentPosition.row))
-        } else if (Math.percentChance(75) && currentPosition.row < width - 2) {
+        } else if (go == 1 && currentPosition.row < width - 2) {
             tiles.placeOnTile(Digger, tiles.getTileLocation(currentPosition.column, currentPosition.row + 1))
         } else {
-            Create_Chomper(sprites.create(assets.image`Chomper`, SpriteKind.Chomper), 4, width - 2, list[randint(0, 1)])
+            if (Math.percentChance(chomper_chance)) {
+                if (go == 2) {
+                    Create_Chomper(sprites.create(assets.image`Chomper`, SpriteKind.Player), 4, width - 2, directions[randint(0, 1)])
+                } else {
+                    Create_Chomper(sprites.create(assets.image`Chomper`, SpriteKind.Player), 4, width - 2, directions[randint(2, 3)])
+                }
+            }
         }
         if (!(Digger.tileKindAt(TileDirection.Center, sprites.dungeon.stairLarge) || Digger.tileKindAt(TileDirection.Center, sprites.dungeon.collectibleInsignia))) {
             tiles.setTileAt(Digger.tilemapLocation(), sprites.dungeon.darkGroundCenter)
@@ -53,6 +54,10 @@ function Create_Chomper (Chomper: Sprite, length: number, sizeCap: number, direc
             tiles.placeOnTile(ChomperSprite, tiles.getTileLocation(chomperPos.column, chomperPos.row + 1))
         } else if (direction == "north" && chomperPos.row > 1) {
             tiles.placeOnTile(ChomperSprite, tiles.getTileLocation(chomperPos.column, chomperPos.row - 1))
+        } else if (direction == "east" && chomperPos.column < sizeCap) {
+            tiles.placeOnTile(ChomperSprite, tiles.getTileLocation(chomperPos.column + 1, chomperPos.row))
+        } else if (direction == "west" && chomperPos.column > 1) {
+            tiles.placeOnTile(ChomperSprite, tiles.getTileLocation(chomperPos.column - 1, chomperPos.row))
         }
         if (!(ChomperSprite.tileKindAt(TileDirection.Center, sprites.dungeon.stairLarge) || ChomperSprite.tileKindAt(TileDirection.Center, sprites.dungeon.collectibleInsignia))) {
             tiles.setTileAt(ChomperSprite.tilemapLocation(), sprites.dungeon.darkGroundCenter)
@@ -61,18 +66,10 @@ function Create_Chomper (Chomper: Sprite, length: number, sizeCap: number, direc
     }
     sprites.destroy(ChomperSprite)
 }
-scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite, location) {
-    Generate_Dungeon(10, 10, 100)
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(1, 1))
-})
 let chomperPos: tiles.Location = null
 let ChomperSprite: Sprite = null
 let currentPosition: tiles.Location = null
-let list: string[] = []
+let go = 0
+let directions: string[] = []
 let Digger: Sprite = null
-let mySprite: Sprite = null
-mySprite = sprites.create(assets.image`noob`, SpriteKind.Player)
 Generate_Dungeon(10, 10, 100)
-controller.moveSprite(mySprite)
-tiles.placeOnTile(mySprite, tiles.getTileLocation(1, 1))
-scene.cameraFollowSprite(mySprite)
