@@ -14,7 +14,8 @@
         "tilemap.g.ts",
         "images.g.jres",
         "images.g.ts",
-        "backupA.ts"
+        "backupA.ts",
+        "main.py"
     ],
     "testFiles": [
         "test.ts"
@@ -26,5 +27,5 @@
     "supportedTargets": [
         "arcade"
     ],
-    "preferredEditor": "blocksprj"
+    "preferredEditor": "tsprj"
 }
