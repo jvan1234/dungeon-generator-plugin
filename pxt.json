@@ -14,7 +14,6 @@
         "tilemap.g.ts",
         "images.g.jres",
         "images.g.ts",
-        "backupA.ts",
         "main.py"
     ],
     "testFiles": [
