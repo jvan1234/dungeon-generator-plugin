@@ -41,11 +41,14 @@ namespace dungeons {
             }
             xIndex += 1
         }
+        let Digger: Sprite = null
         Digger = sprites.create(assets.image`
         shovel
     `, SpriteKind.Player)
         tiles.placeOnTile(Digger, tiles.getTileLocation(1, 1))
-        directions = ["north", "south", "east", "west"]
+        let directions = ["north", "south", "east", "west"]
+        let go = 0
+        let currentPosition: tiles.Location = null
         while (!Digger.tileKindAt(TileDirection.Center, sprites.dungeon.collectibleInsignia)) {
             go = randint(0, 3)
             currentPosition = Digger.tilemapLocation()
@@ -56,11 +59,9 @@ namespace dungeons {
                 tiles.placeOnTile(Digger, tiles.getTileLocation(currentPosition.column, currentPosition.row + 1))
             } else if (Math.percentChance(chomper_chance)) {
                 if (go == 2) {
-                    Create_Chomper(sprites.create(assets.image`Chomper`, SpriteKind.Player), 4, width - 2, directions[randint(0, 1)])
+                    Create_Chomper(sprites.create(assets.image`Chomper`, SpriteKind.Player), 4, width - 2, directions[randint(0, 1)], currentPosition.column, currentPosition.row);
                 } else {
-                    Create_Chomper(sprites.create(assets.image`
-                            Chomper
-                        `, SpriteKind.Player), 4, width - 2, directions[randint(2, 3)])
+                    Create_Chomper(sprites.create(assets.image`Chomper`, SpriteKind.Player), 4, width - 2, directions[randint(2, 3)], currentPosition.column, currentPosition.row);
                 }
 
             }
@@ -74,10 +75,11 @@ namespace dungeons {
         sprites.destroy(Digger)
     }
 
-    function Create_Chomper(Chomper: Sprite, length2: number, sizeCap: number, direction: string) {
-
+    function Create_Chomper(Chomper: Sprite, length2: number, sizeCap: number, direction: string, startPosX: number, startPosY: number) {
+        let chomperPos: tiles.Location = null
+        let ChomperSprite: Sprite = null
         ChomperSprite = Chomper
-        tiles.placeOnTile(ChomperSprite, Digger.tilemapLocation())
+        tiles.placeOnTile(ChomperSprite, tiles.getTileLocation(startPosX, startPosY))
         for (let index = 0; index < length2; index++) {
             chomperPos = ChomperSprite.tilemapLocation()
             if (direction == "south" && chomperPos.row < sizeCap) {
@@ -99,11 +101,10 @@ namespace dungeons {
         sprites.destroy(ChomperSprite)
     }
 
-    let chomperPos: tiles.Location = null
-    let ChomperSprite: Sprite = null
-    let currentPosition: tiles.Location = null
-    let go = 0
-    let directions: string[] = []
-    let Digger: Sprite = null
+    
+    
+    
+    
+    
     
 }
