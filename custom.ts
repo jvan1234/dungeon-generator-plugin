@@ -22,9 +22,7 @@ namespace dungeons {
     export function Generate_Dungeon(length: number, width: number, chomper_chance: number) {
         let yIndex: number;
 
-        tiles.setCurrentTilemap(tilemap`
-        level1
-    `)
+        tiles.setCurrentTilemap(tilemap`level1`)
         let xIndex = 0
         while (xIndex <= length - 1) {
             yIndex = 0
@@ -58,9 +56,7 @@ namespace dungeons {
                 tiles.placeOnTile(Digger, tiles.getTileLocation(currentPosition.column, currentPosition.row + 1))
             } else if (Math.percentChance(chomper_chance)) {
                 if (go == 2) {
-                    Create_Chomper(sprites.create(assets.image`
-                            Chomper
-                        `, SpriteKind.Player), 4, width - 2, directions[randint(0, 1)])
+                    Create_Chomper(sprites.create(assets.image`Chomper`, SpriteKind.Player), 4, width - 2, directions[randint(0, 1)])
                 } else {
                     Create_Chomper(sprites.create(assets.image`
                             Chomper
