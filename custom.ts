@@ -15,6 +15,7 @@ namespace dungeons {
      * TODO: This code generates a rectangle given parameters
      * @param length how wide the dungeon will be, in tiles, eg: 10
      * @param width how long the dungeon will be, in tiles, eg: 10
+     * @param chomper_chance how likely a new path will be created, in %, eg: 50
      */
     //% block
     
